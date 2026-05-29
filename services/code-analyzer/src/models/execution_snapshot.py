@@ -1,16 +1,16 @@
 from pydantic import BaseModel
-
+from src.models.execution_action import ExecutionAction
 
 class ExecutionSnapshot(BaseModel):
 
     step: int
 
-    line_number: int
+    current_node: int | None
 
-    current_node: str | None
+    stack: list[int]
 
-    stack: list[str]
+    result: list[int]
 
-    result: list[str]
+    action: ExecutionAction
 
     explanation: str

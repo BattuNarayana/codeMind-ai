@@ -1,6 +1,13 @@
 from pathlib import Path
 
 from src.analyzers.code_analyzer import CodeAnalyzer
+from src.planners.execution_planner import ExecutionPlanner
+from src.generators.example_generator import ExampleGenerator
+from src.models.execution_context import ExecutionContext
+
+from src.executors.iterative_preorder_executor import (
+    IterativePreorderExecutor
+)
 
 def load_sample_code() -> str:
 
@@ -16,9 +23,49 @@ def main():
 
     analysis_result = CodeAnalyzer.analyze(code)
 
-    print("\n=== ANALYSIS RESULT ===")
+    blueprint = ExecutionPlanner.create_blueprint(
+        analysis_result
+    )
 
-    print(analysis_result.model_dump_json(indent=2))
+    example = ExampleGenerator.generate(
+        blueprint
+    )
+
+    context = ExecutionContext(
+    blueprint=blueprint,
+    tree=example
+    )
+
+    trace = (
+        IterativePreorderExecutor.execute(
+            context
+        )
+    )
+
+    print("\n=== ANALYSIS ===")
+    print(
+        analysis_result.model_dump_json(
+            indent=2
+        )
+    )
+
+    print("\n=== BLUEPRINT ===")
+    print(
+        blueprint.model_dump_json(
+            indent=2
+        )
+    )
+
+    print("\n=== TRACE ===")
+
+    print(
+        trace.model_dump_json(
+            indent=2
+        )
+    )
+
+    print("\n=== GENERATED TREE ===")
+    print(example.model_dump())
 
 if __name__ == "__main__":
     main()
