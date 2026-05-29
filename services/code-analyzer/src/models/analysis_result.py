@@ -6,6 +6,8 @@ class AnalysisResult(BaseModel):
 
     algorithm_type: str
 
+    traversal_type: str
+    
     approach: str
 
     data_structures: list[str]
