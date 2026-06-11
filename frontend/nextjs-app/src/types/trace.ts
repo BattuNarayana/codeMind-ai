@@ -13,7 +13,15 @@ export type ExecutionAction =
   | "MOVE_RIGHT"
   | "PUSH_TO_STACK"
   | "INNER_WHILE_CHECK"
-  | "INNER_WHILE_FAILED";
+  | "INNER_WHILE_FAILED"
+  | "PUSH_ROOT_TO_S1"
+  | "POP_FROM_S1"
+  | "PUSH_TO_S2"
+  | "PUSH_LEFT_TO_S1"
+  | "PUSH_RIGHT_TO_S1"
+  | "SECOND_STACK_CHECK"
+  | "POP_FROM_S2"
+  | "ADD_FROM_S2_TO_RESULT";
 
 export interface ExecutionSnapshot {
   step: number;
@@ -26,6 +34,7 @@ export interface ExecutionSnapshot {
 
   metadata?: {
     curr?: number | null;
+    stack2?: number[];
   };
 
   action: ExecutionAction;

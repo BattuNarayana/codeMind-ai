@@ -61,6 +61,33 @@ class ExecutionPlanner:
                 ]
             )
 
+        if (
+            analysis.traversal_type == "POSTORDER"
+            and
+            analysis.approach == "ITERATIVE"
+        ):
+
+            return ExecutionBlueprint(
+                execution_strategy=
+                "ITERATIVE_POSTORDER",
+
+                example_type=
+                "BINARY_TREE",
+
+                visualizations=[
+                    "TREE",
+                    "STACK_1",
+                    "STACK_2",
+                    "RESULT_ARRAY"
+                ],
+
+                required_entities=[
+                    "tree",
+                    "stack1",
+                    "stack2",
+                    "result"
+                ]
+            )
         raise ValueError(
             "Unsupported analysis result"
         )

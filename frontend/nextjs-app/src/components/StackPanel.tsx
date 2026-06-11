@@ -1,9 +1,11 @@
 type Props = {
   stack: number[];
+  title?: string;
 };
 
 export default function StackPanel({
   stack,
+  title = "Stack",
 }: Props) {
   const visualStack = [...stack].reverse();
 
@@ -11,7 +13,7 @@ export default function StackPanel({
     <div className="border p-6 rounded-lg">
 
       <h2 className="font-bold mb-4">
-        Stack
+        {title}
       </h2>
 
       <div className="flex flex-col items-center gap-2">

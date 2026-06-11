@@ -4,248 +4,271 @@ export const sampleTrace: ExecutionTrace = {
   snapshots: [
     {
       "step": 1,
-      "current_node": null,
-      "stack": [],
+      "current_node": 1,
+      "stack": [
+        1
+      ],
       "result": [],
       "metadata": {
-        "curr": 1
+        "stack2": []
       },
-      "action": "SET_CURRENT",
-      "source_code": "TreeNode curr = root",
-      "explanation": "Current pointer initialized to root"
+      "action": "PUSH_ROOT_TO_S1",
+      "source_code": "s1.push(root)",
+      "explanation": "Root node pushed into Stack 1"
     },
     {
       "step": 2,
       "current_node": null,
-      "stack": [],
+      "stack": [
+        1
+      ],
       "result": [],
       "metadata": {
-        "curr": 1
+        "stack2": []
       },
       "action": "WHILE_CHECK",
-      "source_code": "while(curr != null || !stack.isEmpty())",
-      "explanation": "Checking traversal continuation condition"
+      "source_code": "while(!s1.isEmpty())",
+      "explanation": "Checking whether Stack 1 contains nodes"
     },
     {
       "step": 3,
-      "current_node": null,
+      "current_node": 1,
       "stack": [],
       "result": [],
       "metadata": {
-        "curr": 1
+        "stack2": []
       },
-      "action": "INNER_WHILE_CHECK",
-      "source_code": "while(curr != null)",
-      "explanation": "Checking current pointer"
+      "action": "POP_FROM_S1",
+      "source_code": "TreeNode node = s1.pop()",
+      "explanation": "Popped 1 from Stack 1"
     },
     {
       "step": 4,
-      "current_node": null,
-      "stack": [
-        1
-      ],
+      "current_node": 1,
+      "stack": [],
       "result": [],
       "metadata": {
-        "curr": 1
+        "stack2": [
+          1
+        ]
       },
-      "action": "PUSH_TO_STACK",
-      "source_code": "stack.push(curr)",
-      "explanation": "Pushed 1 into stack"
+      "action": "PUSH_TO_S2",
+      "source_code": "s2.push(node)",
+      "explanation": "Pushed 1 into Stack 2"
     },
     {
       "step": 5,
-      "current_node": null,
+      "current_node": 2,
       "stack": [
-        1
+        2
       ],
       "result": [],
       "metadata": {
-        "curr": 2
+        "stack2": [
+          1
+        ]
       },
-      "action": "MOVE_LEFT",
-      "source_code": "curr = curr.left",
-      "explanation": "Moving to left child"
+      "action": "PUSH_LEFT_TO_S1",
+      "source_code": "s1.push(node.left)",
+      "explanation": "Pushed left child 2"
     },
     {
       "step": 6,
-      "current_node": null,
+      "current_node": 3,
       "stack": [
-        1
+        2,
+        3
       ],
       "result": [],
       "metadata": {
-        "curr": 2
+        "stack2": [
+          1
+        ]
       },
-      "action": "INNER_WHILE_CHECK",
-      "source_code": "while(curr != null)",
-      "explanation": "Checking current pointer"
+      "action": "PUSH_RIGHT_TO_S1",
+      "source_code": "s1.push(node.right)",
+      "explanation": "Pushed right child 3"
     },
     {
       "step": 7,
       "current_node": null,
       "stack": [
-        1,
-        2
+        2,
+        3
       ],
       "result": [],
       "metadata": {
-        "curr": 2
+        "stack2": [
+          1
+        ]
       },
-      "action": "PUSH_TO_STACK",
-      "source_code": "stack.push(curr)",
-      "explanation": "Pushed 2 into stack"
+      "action": "WHILE_CHECK",
+      "source_code": "while(!s1.isEmpty())",
+      "explanation": "Checking whether Stack 1 contains nodes"
     },
     {
       "step": 8,
-      "current_node": null,
+      "current_node": 3,
       "stack": [
-        1,
         2
       ],
       "result": [],
       "metadata": {
-        "curr": null
+        "stack2": [
+          1
+        ]
       },
-      "action": "MOVE_LEFT",
-      "source_code": "curr = curr.left",
-      "explanation": "Moving to left child"
+      "action": "POP_FROM_S1",
+      "source_code": "TreeNode node = s1.pop()",
+      "explanation": "Popped 3 from Stack 1"
     },
     {
       "step": 9,
-      "current_node": null,
+      "current_node": 3,
       "stack": [
-        1,
         2
       ],
       "result": [],
       "metadata": {
-        "curr": null
+        "stack2": [
+          1,
+          3
+        ]
       },
-      "action": "INNER_WHILE_FAILED",
-      "source_code": "while(curr != null)",
-      "explanation": "Current pointer became null"
+      "action": "PUSH_TO_S2",
+      "source_code": "s2.push(node)",
+      "explanation": "Pushed 3 into Stack 2"
     },
     {
       "step": 10,
-      "current_node": 2,
+      "current_node": null,
       "stack": [
-        1
+        2
       ],
       "result": [],
       "metadata": {
-        "curr": 2
+        "stack2": [
+          1,
+          3
+        ]
       },
-      "action": "POP_NODE",
-      "source_code": "curr = stack.pop()",
-      "explanation": "Popped 2 from stack"
+      "action": "WHILE_CHECK",
+      "source_code": "while(!s1.isEmpty())",
+      "explanation": "Checking whether Stack 1 contains nodes"
     },
     {
       "step": 11,
       "current_node": 2,
-      "stack": [
-        1
-      ],
-      "result": [
-        2
-      ],
+      "stack": [],
+      "result": [],
       "metadata": {
-        "curr": 2
+        "stack2": [
+          1,
+          3
+        ]
       },
-      "action": "ADD_TO_RESULT",
-      "source_code": "result.add(curr.val)",
-      "explanation": "Added 2 to inorder result"
+      "action": "POP_FROM_S1",
+      "source_code": "TreeNode node = s1.pop()",
+      "explanation": "Popped 2 from Stack 1"
     },
     {
       "step": 12,
-      "current_node": null,
-      "stack": [
-        1
-      ],
-      "result": [
-        2
-      ],
+      "current_node": 2,
+      "stack": [],
+      "result": [],
       "metadata": {
-        "curr": null
+        "stack2": [
+          1,
+          3,
+          2
+        ]
       },
-      "action": "MOVE_RIGHT",
-      "source_code": "curr = curr.right",
-      "explanation": "Moving to right child"
+      "action": "PUSH_TO_S2",
+      "source_code": "s2.push(node)",
+      "explanation": "Pushed 2 into Stack 2"
     },
     {
       "step": 13,
       "current_node": null,
-      "stack": [
-        1
-      ],
-      "result": [
-        2
-      ],
+      "stack": [],
+      "result": [],
       "metadata": {
-        "curr": null
+        "stack2": [
+          1,
+          3,
+          2
+        ]
       },
-      "action": "WHILE_CHECK",
-      "source_code": "while(curr != null || !stack.isEmpty())",
-      "explanation": "Checking traversal continuation condition"
+      "action": "WHILE_CHECK_FAILED",
+      "source_code": "while(!s1.isEmpty())",
+      "explanation": "Stack 1 became empty"
     },
     {
       "step": 14,
       "current_node": null,
-      "stack": [
-        1
-      ],
-      "result": [
-        2
-      ],
+      "stack": [],
+      "result": [],
       "metadata": {
-        "curr": null
+        "stack2": [
+          1,
+          3,
+          2
+        ]
       },
-      "action": "INNER_WHILE_FAILED",
-      "source_code": "while(curr != null)",
-      "explanation": "Current pointer became null"
+      "action": "SECOND_STACK_CHECK",
+      "source_code": "while(!s2.isEmpty())",
+      "explanation": "Checking whether Stack 2 contains nodes"
     },
     {
       "step": 15,
-      "current_node": 1,
+      "current_node": 2,
       "stack": [],
       "result": [
         2
       ],
       "metadata": {
-        "curr": 1
+        "stack2": [
+          1,
+          3
+        ]
       },
-      "action": "POP_NODE",
-      "source_code": "curr = stack.pop()",
-      "explanation": "Popped 1 from stack"
+      "action": "ADD_FROM_S2_TO_RESULT",
+      "source_code": "result.add(s2.pop().val)",
+      "explanation": "Added 2 to postorder result"
     },
     {
       "step": 16,
-      "current_node": 1,
-      "stack": [],
-      "result": [
-        2,
-        1
-      ],
-      "metadata": {
-        "curr": 1
-      },
-      "action": "ADD_TO_RESULT",
-      "source_code": "result.add(curr.val)",
-      "explanation": "Added 1 to inorder result"
-    },
-    {
-      "step": 17,
       "current_node": null,
       "stack": [],
       "result": [
-        2,
-        1
+        2
       ],
       "metadata": {
-        "curr": 3
+        "stack2": [
+          1,
+          3
+        ]
       },
-      "action": "MOVE_RIGHT",
-      "source_code": "curr = curr.right",
-      "explanation": "Moving to right child"
+      "action": "SECOND_STACK_CHECK",
+      "source_code": "while(!s2.isEmpty())",
+      "explanation": "Checking whether Stack 2 contains nodes"
+    },
+    {
+      "step": 17,
+      "current_node": 3,
+      "stack": [],
+      "result": [
+        2,
+        3
+      ],
+      "metadata": {
+        "stack2": [
+          1
+        ]
+      },
+      "action": "ADD_FROM_S2_TO_RESULT",
+      "source_code": "result.add(s2.pop().val)",
+      "explanation": "Added 3 to postorder result"
     },
     {
       "step": 18,
@@ -253,143 +276,48 @@ export const sampleTrace: ExecutionTrace = {
       "stack": [],
       "result": [
         2,
-        1
+        3
       ],
       "metadata": {
-        "curr": 3
+        "stack2": [
+          1
+        ]
       },
-      "action": "WHILE_CHECK",
-      "source_code": "while(curr != null || !stack.isEmpty())",
-      "explanation": "Checking traversal continuation condition"
+      "action": "SECOND_STACK_CHECK",
+      "source_code": "while(!s2.isEmpty())",
+      "explanation": "Checking whether Stack 2 contains nodes"
     },
     {
       "step": 19,
-      "current_node": null,
+      "current_node": 1,
       "stack": [],
       "result": [
         2,
+        3,
         1
       ],
       "metadata": {
-        "curr": 3
+        "stack2": []
       },
-      "action": "INNER_WHILE_CHECK",
-      "source_code": "while(curr != null)",
-      "explanation": "Checking current pointer"
+      "action": "ADD_FROM_S2_TO_RESULT",
+      "source_code": "result.add(s2.pop().val)",
+      "explanation": "Added 1 to postorder result"
     },
     {
       "step": 20,
       "current_node": null,
-      "stack": [
-        3
-      ],
-      "result": [
-        2,
-        1
-      ],
-      "metadata": {
-        "curr": 3
-      },
-      "action": "PUSH_TO_STACK",
-      "source_code": "stack.push(curr)",
-      "explanation": "Pushed 3 into stack"
-    },
-    {
-      "step": 21,
-      "current_node": null,
-      "stack": [
-        3
-      ],
-      "result": [
-        2,
-        1
-      ],
-      "metadata": {
-        "curr": null
-      },
-      "action": "MOVE_LEFT",
-      "source_code": "curr = curr.left",
-      "explanation": "Moving to left child"
-    },
-    {
-      "step": 22,
-      "current_node": null,
-      "stack": [
-        3
-      ],
-      "result": [
-        2,
-        1
-      ],
-      "metadata": {
-        "curr": null
-      },
-      "action": "INNER_WHILE_FAILED",
-      "source_code": "while(curr != null)",
-      "explanation": "Current pointer became null"
-    },
-    {
-      "step": 23,
-      "current_node": 3,
       "stack": [],
       "result": [
         2,
+        3,
         1
       ],
       "metadata": {
-        "curr": 3
-      },
-      "action": "POP_NODE",
-      "source_code": "curr = stack.pop()",
-      "explanation": "Popped 3 from stack"
-    },
-    {
-      "step": 24,
-      "current_node": 3,
-      "stack": [],
-      "result": [
-        2,
-        1,
-        3
-      ],
-      "metadata": {
-        "curr": 3
-      },
-      "action": "ADD_TO_RESULT",
-      "source_code": "result.add(curr.val)",
-      "explanation": "Added 3 to inorder result"
-    },
-    {
-      "step": 25,
-      "current_node": null,
-      "stack": [],
-      "result": [
-        2,
-        1,
-        3
-      ],
-      "metadata": {
-        "curr": null
-      },
-      "action": "MOVE_RIGHT",
-      "source_code": "curr = curr.right",
-      "explanation": "Moving to right child"
-    },
-    {
-      "step": 26,
-      "current_node": null,
-      "stack": [],
-      "result": [
-        2,
-        1,
-        3
-      ],
-      "metadata": {
-        "curr": null
+        "stack2": []
       },
       "action": "WHILE_CHECK_FAILED",
-      "source_code": "while(curr != null || !stack.isEmpty())",
-      "explanation": "Traversal completed"
+      "source_code": "while(!s2.isEmpty())",
+      "explanation": "Postorder traversal completed"
     }
   ],
 };

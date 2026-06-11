@@ -29,7 +29,8 @@ export default function Home() {
 
   const snapshot =
     sampleTrace.snapshots[currentIndex];
-
+    const stack2 =
+      snapshot.metadata?.stack2 ?? [];
 
     useEffect(() => {
 
@@ -94,12 +95,18 @@ const handlePlay = () => {
         }
         />
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-4 gap-4">
 
   
 
   <StackPanel
     stack={snapshot.stack}
+    title="Stack 1"
+  />
+
+  <StackPanel
+    stack={stack2}
+    title="Stack 2"
   />
 
   <ResultPanel
