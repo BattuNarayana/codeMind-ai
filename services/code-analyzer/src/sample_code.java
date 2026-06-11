@@ -1,4 +1,4 @@
-public List<Integer> preorderTraversal(TreeNode root) {
+public List<Integer> inorderTraversal(TreeNode root) {
 
     Stack<TreeNode> stack = new Stack<>();
 

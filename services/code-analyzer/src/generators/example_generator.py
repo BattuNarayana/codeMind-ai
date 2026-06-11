@@ -9,7 +9,7 @@ class ExampleGenerator:
         blueprint: ExecutionBlueprint
     ):
 
-        if blueprint.execution_strategy == "ITERATIVE_PREORDER":
+        if blueprint.example_type == "BINARY_TREE":
 
             return TreeNode(
                 value=1,
@@ -22,6 +22,6 @@ class ExampleGenerator:
             )
 
         raise ValueError(
-            f"Unsupported strategy: "
-            f"{blueprint.execution_strategy}"
+            f"Unsupported example type: "
+            f"{blueprint.example_type}"
         )

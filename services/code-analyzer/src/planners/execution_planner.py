@@ -34,6 +34,32 @@ class ExecutionPlanner:
                     "result"
                 ]
             )
+        
+        if (
+            analysis.traversal_type == "INORDER"
+            and
+            analysis.approach == "ITERATIVE"
+        ):
+
+            return ExecutionBlueprint(
+                execution_strategy=
+                "ITERATIVE_INORDER",
+
+                example_type=
+                "BINARY_TREE",
+
+                visualizations=[
+                    "TREE",
+                    "STACK",
+                    "RESULT_ARRAY"
+                ],
+
+                required_entities=[
+                    "tree",
+                    "stack",
+                    "result"
+                ]
+            )
 
         raise ValueError(
             "Unsupported analysis result"

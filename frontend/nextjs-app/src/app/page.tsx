@@ -2,17 +2,83 @@
 
 import { sampleTrace } from "@/data/sampleTrace";
 import { useTraceStore } from "@/store/traceStore";
+import TreePanel from "@/components/TreePanel";
+import StackPanel from "@/components/StackPanel";
+import ResultPanel from "@/components/ResultPanel";
+import TraceInfo from "@/components/TraceInfo";
+import Controls from "@/components/Controls";
+import CodePanel from "@/components/CodePanel";
+import CodePanelV2 from "@/components/CodePanelV2";
+import { useEffect } from "react";
+import Timeline from "@/components/Timeline";
 
 export default function Home() {
 
   const {
-    currentIndex,
-    nextStep,
-    previousStep,
-  } = useTraceStore();
+  currentIndex,
+  nextStep,
+  previousStep,
+  isPlaying,
+  playbackSpeed,
+  play,
+  pause,
+  reset,
+  setSpeed,
+  setStep,
+} = useTraceStore();
 
   const snapshot =
     sampleTrace.snapshots[currentIndex];
+
+
+    useEffect(() => {
+
+  if (!isPlaying) {
+    return;
+  }
+
+  const interval = setInterval(() => {
+
+    nextStep();
+
+  }, playbackSpeed);
+
+  return () => {
+    clearInterval(interval);
+  };
+
+}, [
+  isPlaying,
+  playbackSpeed,
+  nextStep,
+]);
+
+useEffect(() => {
+
+  if (
+    currentIndex ===
+    sampleTrace.snapshots.length - 1
+  ) {
+    pause();
+  }
+
+}, [
+  currentIndex,
+  pause,
+]);
+
+const handlePlay = () => {
+
+  if (
+    currentIndex ===
+    sampleTrace.snapshots.length - 1
+  ) {
+    reset();
+  }
+
+  play();
+};
+
 
   return (
     <main className="min-h-screen p-8">
@@ -21,77 +87,64 @@ export default function Home() {
         CodeMind AI
       </h1>
 
-      <div className="border p-4 rounded-lg mb-4">
-        <h2 className="font-semibold">
-          Current Step
-        </h2>
+      <TreePanel
+        currentNode={snapshot.current_node}
+        currentPointer={
+            snapshot.metadata?.curr ?? null
+        }
+        />
 
-        <p>{snapshot.step}</p>
-      </div>
+      <div className="grid grid-cols-3 gap-4">
 
-      <div className="border p-4 rounded-lg mb-4">
-        <h2 className="font-semibold">
-          Stack
-        </h2>
+  
 
-        <p>
-          {JSON.stringify(snapshot.stack)}
-        </p>
-      </div>
+  <StackPanel
+    stack={snapshot.stack}
+  />
 
-      <div className="border p-4 rounded-lg mb-4">
-        <h2 className="font-semibold">
-          Result
-        </h2>
+  <ResultPanel
+    result={snapshot.result}
+  />
 
-        <p>
-          {JSON.stringify(snapshot.result)}
-        </p>
-      </div>
+  <CodePanelV2
+  activeStatement={snapshot.source_code}
+  />
 
-      <div className="border p-4 rounded-lg mb-4">
-        <h2 className="font-semibold">
-          Action
-        </h2>
+</div>
 
-        <p>{snapshot.action}</p>
-      </div>
+<div className="mt-6">
 
-      <div className="border p-4 rounded-lg mb-8">
-        <h2 className="font-semibold">
-          Explanation
-        </h2>
+  <TraceInfo
+    snapshot={snapshot}
+  />
 
-        <p>{snapshot.explanation}</p>
-      </div>
+</div>
 
-      <div className="flex gap-4">
+<div className="mt-6">
 
-        <button
-          onClick={previousStep}
-          className="
-            border
-            px-4
-            py-2
-            rounded
-          "
-        >
-          Previous
-        </button>
+  <Controls
+  onPrevious={previousStep}
+  onNext={nextStep}
 
-        <button
-          onClick={nextStep}
-          className="
-            border
-            px-4
-            py-2
-            rounded
-          "
-        >
-          Next
-        </button>
+  onPlay={handlePlay}
+  onPause={pause}
 
-      </div>
+  isPlaying={isPlaying}
+
+  onSpeedChange={setSpeed}
+
+  
+  />
+
+  <Timeline
+  currentIndex={currentIndex}
+  maxIndex={
+    sampleTrace.snapshots.length - 1
+  }
+  onChange={setStep}
+/>
+
+</div>
 
     </main>
   );

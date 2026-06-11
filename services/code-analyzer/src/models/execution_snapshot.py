@@ -11,6 +11,10 @@ class ExecutionSnapshot(BaseModel):
 
     result: list[int]
 
+    metadata: dict = {}
+
     action: ExecutionAction
+
+    source_code: str | None
 
     explanation: str

@@ -11,7 +11,9 @@ class SnapshotBuilder:
         stack: list[int],
         result: list[int],
         action: ExecutionAction,
-        explanation: str
+        source_code: str | None,
+        explanation: str,
+        metadata: dict | None = None
     ) -> ExecutionSnapshot:
 
         return ExecutionSnapshot(
@@ -19,6 +21,9 @@ class SnapshotBuilder:
             current_node=current_node,
             stack=stack.copy(),
             result=result.copy(),
+            metadata=metadata or {},
             action=action,
-            explanation=explanation
+            source_code=source_code,
+            explanation=explanation,
+
         )

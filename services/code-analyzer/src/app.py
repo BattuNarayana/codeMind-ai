@@ -5,8 +5,8 @@ from src.planners.execution_planner import ExecutionPlanner
 from src.generators.example_generator import ExampleGenerator
 from src.models.execution_context import ExecutionContext
 
-from src.executors.iterative_preorder_executor import (
-    IterativePreorderExecutor
+from src.factories.executor_factory import (
+    ExecutorFactory
 )
 
 def load_sample_code() -> str:
@@ -36,10 +36,14 @@ def main():
     tree=example
     )
 
-    trace = (
-        IterativePreorderExecutor.execute(
-            context
+    executor = (
+        ExecutorFactory.get_executor(
+            blueprint.execution_strategy
         )
+    )
+
+    trace = executor.execute(
+        context
     )
 
     print("\n=== ANALYSIS ===")
